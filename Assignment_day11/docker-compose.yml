@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  app:
+    build: .
+    ports: 
+      - 8080:8080
+    depends_on: 
+      - localhost
+  localhost:
+    image: postgres:10.16
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: koa
+    ports: 
+      - 5432:5432
+    volumes: 
+      - localhost-data:/var/lib/postgresql/data
+volumes: 
+  localhost-data:
